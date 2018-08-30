@@ -1,0 +1,179 @@
+=head1 ConsoleTools
+
+This addon provides some commands for the OTRS console script
+
+=head2 COMMANDS
+
+The subsequent paragraphs describe the new commands
+
+=head3 Admin::ITSM::ConfigItem::Add
+
+    $ perl bin/otrs.Console.pl Admin::ITSM::ConfigItem::Add --help
+    
+    Add a config item.
+    
+    Usage:
+     otrs.Console.pl Admin::ITSM::ConfigItem::Add --class ... --name ... --incistate ... --deplstate ... [--attribute ...(+)]
+    
+    Options:
+     --class ...                    - Class of the config item
+     --name ...                     - Name for the config item.
+     --incistate ...                - Incident state of the config item
+     --deplstate ...                - Deployment state of the config item
+     [--attribute ...(+)]           - One attribute (form: <attrname>=<value>)
+     [--help]                       - Display help for this command.
+     [--no-ansi]                    - Do not perform ANSI terminal output coloring.
+     [--quiet]                      - Suppress informative output, only retain error messages.
+
+
+=head3 Admin::User::Search
+
+    $ perl bin/otrs.Console.pl Admin::User::Search --help
+    
+    Search for users.
+    
+    Usage:
+     otrs.Console.pl Admin::User::Search --term ... [--valid]
+    
+    Options:
+     --term ...                     - Search term.
+     [--valid]                      - Search only for valid users
+     [--help]                       - Display help for this command.
+     [--no-ansi]                    - Do not perform ANSI terminal output coloring.
+     [--quiet]                      - Suppress informative output, only retain error messages.
+
+Output:
+
+    $ perl bin/otrs.Console.pl Admin::User::Search --term root*
+    Search for users...
+    "Admin OTRS" <root@localhost>
+    Done.
+
+=head3 Maint::NotificationEvent::Dump
+
+    $ perl bin/otrs.Console.pl Maint::NotificationEvent::Dump --help
+    
+    Print dump of all event based notifications.
+    
+    Usage:
+     otrs.Console.pl Maint::NotificationEvent::Dump [--id ...(+)] [--name ...(+)]
+    
+    Options:
+     [--id ...(+)]                  - ID of notification to be dumped.
+     [--name ...(+)]                - Name of notification to be dumped.
+     [--help]                       - Display help for this command.
+     [--no-ansi]                    - Do not perform ANSI terminal output coloring.
+     [--quiet]                      - Suppress informative output, only retain error messages.
+
+Output:
+
+    $ perl bin/otrs.Console.pl Maint::NotificationEvent::Dump --id 1
+    Print dump of all event based notifications...
+    $VAR1 = [
+      {
+        'ChangeBy' => '1',
+        'ChangeTime' => '2017-11-26 08:09:58',
+        'Comment' => '',
+        'CreateBy' => '1',
+        'CreateTime' => '2017-11-26 08:09:58',
+        'Data' => {
+          'AgentEnabledByDefault' => [
+            'Email'
+          ],
+          'Events' => [
+            'NotificationNewTicket'
+          ],
+          'Recipients' => [
+            'AgentMyQueues',
+            'AgentMyServices'
+          ],
+          'SendOnOutOfOffice' => [
+            '1'
+          ],
+          'Transports' => [
+            'Email'
+          ],
+          'VisibleForAgent' => [
+            '1'
+          ],
+          'VisibleForAgentTooltip' => [
+            'You will receive a notification each time a new ticket is created in one of your "My Queues" or "My Services".'
+          ]
+        },
+        'ID' => '1',
+        'Message' => {
+          'de' => {
+            'Body' => 'Hallo ....'
+          }
+        },
+      }
+
+=head3 Maint::Ticket::CheckFlag
+
+    $ perl bin/otrs.Console.pl Maint::Ticket::CheckFlag --help
+    
+    Check "Seen" flag for all users and all tickets.
+    
+    Usage:
+     otrs.Console.pl Maint::Ticket::CheckFlag [--state ...(+)] [--fix-flag] [--summary] [--links]
+    
+    Options:
+     [--state ...(+)]               - State of ticket.
+     [--fix-flag]                   - reset ticket flag if user has not seen all articles.
+     [--summary]                    - print summary at the end of the check.
+     [--links]                      - print summary at the end of the check.
+     [--help]                       - Display help for this command.
+     [--no-ansi]                    - Do not perform ANSI terminal output coloring.
+     [--quiet]                      - Suppress informative output, only retain error messages.
+
+Output:
+
+    $ perl bin/otrs.Console.pl Maint::Ticket::CheckFlag
+    Check 'Seen' flag for all users and all tickets...
+    Checks for User root@localhost
+    Ok for user root@localhost.
+    Checks for User ao
+    Ok for user ao.
+    Checks for User at
+    Ticket 23 marked as seen, but not all articles are marked as seen
+    Checks for User ta
+    Ok for user ta.
+    Checks for User aa
+    Ok for user aa.
+    Checks for User hm
+    Ok for user hm.
+    Checks for User hu
+    Ok for user hu.
+    Checks for User kit
+    Ok for user kit.
+    Done.
+
+=head3 Maint::Ticket::Info
+
+    $ perl bin/otrs.Console.pl Maint::Ticket::Info --help
+    
+    Infos about a ticket.
+    
+    Usage:
+     otrs.Console.pl Maint::Ticket::Info [--id ...] [--number ...]
+    
+    Options:
+     [--id ...]                     - ticket id.
+     [--number ...]                 - ticket number
+     [--help]                       - Display help for this command.
+     [--no-ansi]                    - Do not perform ANSI terminal output coloring.
+     [--quiet]                      - Suppress informative output, only retain error messages.
+
+Output:
+
+    $ perl bin/otrs.Console.pl Maint::Ticket::Info --id 1
+    Infos about a ticket...
+    TicketID: 1
+    Ticket#: 2015071510123456
+    Title: Welcome to OTRS!
+    State: open
+    Owner: root@localhost
+    Priority: 3 normal
+    Queue: Raw
+        Done.
+
