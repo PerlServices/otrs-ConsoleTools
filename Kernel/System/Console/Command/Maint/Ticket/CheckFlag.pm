@@ -64,6 +64,8 @@ sub Run {
         Valid => 1,
     );
 
+    my %ReverseUserList = reverse %UserList;
+
     my %Opts;
     my $States = $Self->GetOption('state');
     if ( $States ) {
@@ -163,6 +165,23 @@ sub Run {
 
         if ( !%Errors ) {
             $Self->Print("<green>    Everything ok.</green>\n");
+        }
+    }
+
+    if ( $Self->GetOption('fix-flag') ) {
+        $Self->Print("<yellow>Fixing flags:</yellow>\n");
+
+        for my $User ( sort keys %Errors ) {
+            for my $Error ( @{ $Errors{$User} || [] } ) {
+                my ($TicketID) = @{ $Error || [] };
+                $Self->Print("<yellow>    $User: Delete ticket flag for TicketID $TicketID.</yellow>\n");
+
+                $TicketObject->TicketFlagDelete(
+                    TicketID => $TicketID,
+                    Key      => 'Seen',
+                    UserID   => $ReverseUserList{$User},
+                );
+            }
         }
     }
 
