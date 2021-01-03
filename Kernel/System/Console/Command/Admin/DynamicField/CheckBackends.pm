@@ -41,15 +41,15 @@ sub Run {
         $Self->Print("<yellow>Check $Backend...  </yellow>");
 
         # require this backend
-	my $Module = $AllBackends{$Backend};
-	my $Loaded = $MainObject->Require( $Module, Silent => 1 );
+        my $Module = $AllBackends{$Backend};
+        my $Loaded = $MainObject->Require( $Module, Silent => 1 );
 
         if ( $Loaded ) {
             $Self->Print("<green>Ok.</green>\n");
         }
-	else {
+        else {
             $Self->Print("<red>Failed.</red>\n");
-	}
+        }
     }
 
     $Self->Print("<green>Done.</green>\n");
@@ -71,8 +71,8 @@ sub _UsedBackendsGet {
     my %Backends;
     while ( my @Row = $DBObject->FetchrowArray() ) {
         my $Name   = $Row[0];
-	my $Module = 'Kernel::System::DynamicField::Driver::' . $Name;
-	$Backends{$Name} = $Module;
+    my $Module = 'Kernel::System::DynamicField::Driver::' . $Name;
+    $Backends{$Name} = $Module;
     }
 
     return %Backends;
