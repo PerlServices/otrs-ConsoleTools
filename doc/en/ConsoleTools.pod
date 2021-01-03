@@ -177,3 +177,24 @@ Output:
     Queue: Raw
         Done.
 
+=head3 Admin::DynamicField::CheckBackends
+
+This command checks if the backend modules for all dynamic fields
+can be loaded. This check might fail if OTRS is upgraded, but not
+all addons (which might add backend modules). Or someone changed
+the backend and there's a syntax error.
+
+    $ perl bin/otrs.Console.pl Admin::DynamicField::CheckBackends
+    Checking all dynamic field backends...
+    Check ActivityID...  Ok.
+    Check Checkbox...  Ok.
+    Check Date...  Ok.
+    Check DateTime...  Ok.
+    Check Dropdown...  Ok.
+    Check Multiselect...  Ok.
+    Check OTRSDBTable...  Ok.
+    Check ProcessID...  Ok.
+    Check Text...  Ok.
+    Check TextArea...  Ok.
+    Done.
+
