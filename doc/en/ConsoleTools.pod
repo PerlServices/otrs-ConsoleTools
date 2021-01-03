@@ -198,3 +198,29 @@ the backend and there's a syntax error.
     Check TextArea...  Ok.
     Done.
 
+=head3 Admin::Ticket::History::RemoveAgentHistory
+
+When an employee leaves the company the ticket history for that employee
+might need to be removed due to data protection regulations (GDPR). This
+command helps to do that:
+
+    $ perl bin/otrs.Console.pl Admin::Ticket::History::RemoveAgentHistory
+    Error: please provide option '--login'.
+
+    Remove entries that user has read it from a ticket's history.
+
+    Usage:
+     otrs.Console.pl Admin::Ticket::History::RemoveAgentHistory --login ...
+
+    Options:
+     --login ...                    - user login.
+     [--help]                       - Display help for this command.
+     [--no-ansi]                    - Do not perform ANSI terminal output coloring.
+     [--quiet]                      - Suppress informative output, only retain error messages.
+
+
+    $ perl bin/otrs.Console.pl Admin::Ticket::History::RemoveAgentHistory --login ta
+    Remove entries that user has read it from a ticket's history....
+    User 'ta' has id 2.
+    Done.
+
