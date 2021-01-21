@@ -224,3 +224,20 @@ command helps to do that:
     User 'ta' has id 2.
     Done.
 
+
+=head3 Admin::Database::RemovePID
+
+If you're stuck with a process id left in the database and you can't run a command, you can delete the process id
+with this command.
+
+    $ perl bin/otrs.Console.pl Admin::Database::RemovePID --pid 1
+    Remove ProcessID(s)....
+    Done.
+    $ perl bin/otrs.Console.pl Admin::Database::RemovePID --pid 123456
+    Remove ProcessID(s)....
+    Done.
+    $ perl bin/otrs.Console.pl Admin::Database::RemovePID --pid 123457 --pid 123458
+    Remove ProcessID(s)....
+    Done.
+    $ perl bin/otrs.Console.pl Admin::Database::RemovePID --all
+
