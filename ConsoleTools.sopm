@@ -2,7 +2,7 @@
 <otrs_package version="1.0">
     <!-- GENERATED WITH OTRS::OPM::Maker::Command::sopm (1.4) -->
     <Name>ConsoleTools</Name>
-    <Version>6.0.5</Version>
+    <Version>6.0.6</Version>
     <Framework>6.0.x</Framework>
     <Vendor>Perl-Services.de</Vendor>
     <URL>http://www.perl-services.de</URL>
@@ -10,6 +10,7 @@
     <Description Lang="en">Some more useful commands for the OTRS console</Description>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Filelist>
+        <File Permission="644" Location="Kernel/System/Console/Command/Admin/Database/RemovePID.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/DynamicField/CheckBackends.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/Add.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/Ticket/History/RemoveAgentHistory.pm" />
