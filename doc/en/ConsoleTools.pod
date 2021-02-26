@@ -241,3 +241,52 @@ with this command.
     Done.
     $ perl bin/otrs.Console.pl Admin::Database::RemovePID --all
 
+=head3 Admin::Package::ExportOPM
+
+If you want all opm packages that are installed in the OTRS instance, you can run
+
+    $ perl bin/otrs.Console.pl Admin::Package::ExportOPM --all --target /tmp
+    Export package(s)...
+    Export FAQ to /tmp/FAQ-6.0.23.opm
+    Export ImportExport to /tmp/ImportExport-6.0.23.opm
+    Done.
+    $ perl bin/otrs.Console.pl Admin::Package::ExportOPM --name FAQ --target /tmp
+    Export package(s)...
+    Export FAQ to /tmp/FAQ-6.0.23.opm
+    Done.
+
+=head3 Admin::Email::FetchCheck
+
+Checks all mail accounts if the connect works. This is quite useful when the OTRS instance is moved
+to a new machine and you want to ensure that the mail account is reachable. Another use case
+is the addition of a new mail account.
+
+    $ perl bin/otrs.Console.pl Admin::Email::FetchCheck
+    Check email accounts...
+    Check otrs.dev@example.org/imap.example.org
+    POP3: Auth for user otrs.dev@example.org/imap.example.org failed!.
+    Done.
+    $ perl bin/otrs.Console.pl Admin::Email::FetchCheck --check-alternatives
+    Check email accounts...
+    Check otrs.dev@example.org/imap.example.org
+    POP3: Auth for user otrs.dev@example.org/imap.example.org failed!.
+    POP3S works.
+    POP3TLS works.
+    IMAPS works.
+    IMAPTLS works.
+    Done.
+    $ perl bin/otrs.Console.pl Admin::Email::FetchCheck
+    Check email accounts...
+    Check otrs.dev@example.org/imap.example.org
+    Ok.
+    Done.
+
+=head3 Admin::Email::SendCheck
+
+Checks if OTRS can connect to the SMTP server.
+
+    $ perl bin/otrs.Console.pl Admin::Email::SendCheck
+    Check connection to server...
+    Done.
+
+
