@@ -2,7 +2,7 @@
 <otrs_package version="1.0">
     <!-- GENERATED WITH OTRS::OPM::Maker::Command::sopm (1.4) -->
     <Name>ConsoleTools</Name>
-    <Version>6.0.6</Version>
+    <Version>6.0.7</Version>
     <Framework>6.0.x</Framework>
     <Vendor>Perl-Services.de</Vendor>
     <URL>http://www.perl-services.de</URL>
@@ -12,7 +12,10 @@
     <Filelist>
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/Database/RemovePID.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/DynamicField/CheckBackends.pm" />
+        <File Permission="644" Location="Kernel/System/Console/Command/Admin/Email/FetchCheck.pm" />
+        <File Permission="644" Location="Kernel/System/Console/Command/Admin/Email/SendCheck.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/Add.pm" />
+        <File Permission="644" Location="Kernel/System/Console/Command/Admin/Package/ExportOPM.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/Ticket/History/RemoveAgentHistory.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/User/Search.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Maint/NotificationEvent/Dump.pm" />
