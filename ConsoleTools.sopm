@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.0">
-    <!-- GENERATED WITH OTRS::OPM::Maker::Command::sopm (1.4) -->
+    <!-- GENERATED WITH OTRS::OPM::Maker::Command::sopm (1.44) -->
     <Name>ConsoleTools</Name>
     <Version>6.0.7</Version>
     <Framework>6.0.x</Framework>
@@ -16,6 +16,8 @@
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/Email/SendCheck.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/ITSM/ConfigItem/Add.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/Package/ExportOPM.pm" />
+        <File Permission="644" Location="Kernel/System/Console/Command/Admin/SystemMaintenance/Add.pm" />
+        <File Permission="644" Location="Kernel/System/Console/Command/Admin/SystemMaintenance/Delete.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/Ticket/History/RemoveAgentHistory.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Admin/User/Search.pm" />
         <File Permission="644" Location="Kernel/System/Console/Command/Maint/NotificationEvent/Dump.pm" />
