@@ -289,4 +289,21 @@ Checks if OTRS can connect to the SMTP server.
     Check connection to server...
     Done.
 
+=head3 Admin::SystemMaintenance::Add
+
+Add a new system maintenance entry
+
+    $ perl bin/otrs.Console.pl Admin::SystemMaintenance::Add \
+      --start "2021-11-29 10:00:00" --end "2021-11-29 11:00:00" \
+      --comment "Backup" --login-message "Wir machen ein Backup" --valid 1
+
+=head3 Admin::SystemMaintenance::Delete
+
+    $ perl bin/otrs.Console.pl Admin::SystemMaintenance::Delete --id 5
+
+Deletes entry with ID 5.
+
+    $ perl bin/otrs.Console.pl Admin::SystemMaintenance::Delete --all
+
+Deletes all entries.
 
