@@ -46,11 +46,15 @@ sub Run {
 
     my $MaintenanceObject = $Kernel::OM->Get('Kernel::System::SystemMaintenance');
 
-    my @IDs = $Self->GetArray('id');
+    my @IDs = @{ $Self->GetOption('id') || [] };
 
     my $All = $Self->GetOption('all');
     if ( $All ) {
-        @IDs = keys %{ $MaintenanceObject->SystemMaintenanceList() || {} };
+        @IDs = keys %{
+            $MaintenanceObject->SystemMaintenanceList(
+                UserID => 1,
+            ) || {}
+        };
     }
 
     if ( !@IDs && !$All ) {
@@ -58,8 +62,9 @@ sub Run {
         return $Self->ExitCodeError();
     }
 
+    my $Success;
     for my $ID ( @IDs ) {
-        my $Success = $MaintenanceObject->SystemMaintenanceDelete(
+        $Success++ if $MaintenanceObject->SystemMaintenanceDelete(
             ID     => $ID,
             UserID => 1,
         );

@@ -13,9 +13,11 @@ use warnings;
 
 use base qw(Kernel::System::Console::BaseCommand);
 
-our @ObjectDependencies = (
-    'Kernel::System::SystemMaintenance',
+our @ObjectDependencies = qw(
+    Kernel::System::SystemMaintenance
+    Kernel::System::DateTime
 );
+
 
 sub Configure {
     my ( $Self, %Param ) = @_;
@@ -26,14 +28,14 @@ sub Configure {
         Description => "Start date of the system maintenance",
         Required    => 1,
         HasValue    => 1,
-        ValueRegex  => qr/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} /smx,
+        ValueRegex  => qr/[0-9]{4}-[0-9]{2}-[0-9]{2} [ ] [0-9]{2}:[0-9]{2}:[0-9]{2}/smx,
     );
     $Self->AddOption(
         Name        => 'end',
         Description => "End date of the system maintenance",
         Required    => 1,
         HasValue    => 1,
-        ValueRegex  => qr/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} /smx,
+        ValueRegex  => qr/[0-9]{4}-[0-9]{2}-[0-9]{2} [ ] [0-9]{2}:[0-9]{2}:[0-9]{2}/smx,
     );
     $Self->AddOption(
         Name        => 'comment',
@@ -63,6 +65,13 @@ sub Configure {
         HasValue    => 1,
         ValueRegex  => qr/[12]/,
     );
+    $Self->AddOption(
+        Name        => 'timezone',
+        Description => "Timezone (e.g. Europe/Berlin)",
+        Required    => 0,
+        HasValue    => 1,
+        ValueRegex  => qr/[A-Za-z]+\/[A-Za-z]+/smx,
+    );
 
     return;
 }
@@ -73,6 +82,21 @@ sub Run {
     $Self->Print("<yellow>Adding a new system maintenance entry...</yellow>\n");
 
     my $MaintenanceObject = $Kernel::OM->Get('Kernel::System::SystemMaintenance');
+
+    my %DateTimeOpts;
+
+    my $TimeZone = $Self->GetOption('timezone');
+    if ( $TimeZone ) {
+        $DateTimeOpts{TimeZone} = $TimeZone;
+    }
+
+    my $DateTimeObject = $Kernel::OM->Create(
+        'Kernel::System::DateTime',
+        ( %DateTimeOpts ?
+            (ObjectParams => \%DateTimeOpts) :
+            ()
+        ),
+    );
 
     my %Opts;
 
@@ -87,10 +111,17 @@ sub Run {
         $Opts{NotifyMessage} = $Notification;
     }
 
+    my $StartDate = $Self->GetOption('start');
+    my $StopDate  = $Self->GetOption('end');
+
+    $DateTimeObject->Set( String => $StartDate );
+    $Opts{StartDate} = $DateTimeObject->ToEpoch();
+
+    $DateTimeObject->Set( String => $StopDate );
+    $Opts{StopDate} = $DateTimeObject->ToEpoch();
+
     my $Success = $MaintenanceObject->SystemMaintenanceAdd(
         %Opts,
-        StartDate => $Self->GetOption('start'),
-        StopDate  => $Self->GetOption('end'),
         Comment   => $Self->GetOption('comment'),
         ValidID   => $Self->GetOption('valid'),
         UserID    => 1,
